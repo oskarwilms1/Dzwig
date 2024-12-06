@@ -14,9 +14,9 @@ handle_usr1() {
     rm -f "dzwig1_finished"
 
     # Uruchomienie dźwigów w tle
-    ./dzwig1.sh &
+    ./Dzwig.sh &
     dzwig1_pid=$!
-    ./dzwig2.sh "$dzwig1_pid" &
+    ./Dzwig2.sh "$dzwig1_pid" &
     dzwig2_pid=$!
 
     echo "Dźwigi uruchomione: PID1=$dzwig1_pid PID2=$dzwig2_pid"
@@ -55,5 +55,8 @@ while true; do
         touch "dzwig1_finished"
         echo "Dźwig 1 zakończył pracę. Informuję dźwig 2."
         kill -USR1 "$dzwig2_pid"  # Informowanie dźwigu 2
+    fi
+    if ! ps -p "$dzwig2_pid" > /dev/null 2>&1; then
+        break
     fi
 done

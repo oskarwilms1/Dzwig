@@ -8,6 +8,7 @@ dzwig1_pid=$1
 handle_dzwig1_finished() {
     echo "Dźwig 1 zakończył pracę, dźwig 2 kończy prace."
     exit 0
+    
 }
 
 # Podpięcie funkcji do obsługi sygnału
@@ -24,7 +25,7 @@ while true; do
     else
         # Jeśli nie ma plików w buforze, sprawdzamy ponownie
         sleep 1
-    done
+    fi
 done
 
 echo "Dźwig 2 zakończył pracę."
